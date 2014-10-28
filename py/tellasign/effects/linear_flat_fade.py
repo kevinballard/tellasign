@@ -27,6 +27,7 @@ class LinearFlatFader(object):
     self._refresh = resolution_ms
     self._cycle_period = cycle_period_sec * 1000
     self._cycle_start = 0
+    self._reverse_cycle = False
 
     self._max = max_value
     self._min = min_value
@@ -42,9 +43,13 @@ class LinearFlatFader(object):
       now = time.time() * 1000
       if now > self._cycle_start + self._cycle_period:
         self._cycle_start = now
+        self._reverse_cycle = not self._reverse_cycle
 
       fraction = (now - self._cycle_start) / self._cycle_period
+      if self._reverse_cycle:
+        fraction = 1.0 - fraction
+
       value = fraction * (self._max - self._min) + self._min
       self._manager.set(self._channels, value)
 
-      time.sleep(self._refresh)
+      time.sleep(self._refresh / 1000)
