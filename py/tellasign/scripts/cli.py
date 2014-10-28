@@ -11,7 +11,6 @@ def all_off(universe=1, channels=list(CHS_ALL)):
   """
   """
   manager = TellASign(universe)
-  manager.start()
   manager.set(channels, 0)
   manager.flush()
 
