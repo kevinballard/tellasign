@@ -2,7 +2,7 @@ import array
 from ola.ClientWrapper import ClientWrapper
 
 PERIOD = 100  # 0.5 seconds
-FRAME_SIZE = 20
+FRAME_SIZE = 253
 
 level = 0
 wrapper = None
@@ -15,11 +15,11 @@ def SendFrame():
 
   data = array.array('B')
   for _ in range(FRAME_SIZE):
-    data.append(level % 255)
+    data.append(254)#level % 255)
 
   level += 1
 
-  print "Setting level %d" % level
+  print "Setting level %d" % (level % 255)
   wrapper.Client().SendDmx(1, data, lambda x: None)
 
 if __name__ == '__main__':
