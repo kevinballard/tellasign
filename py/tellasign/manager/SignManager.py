@@ -16,8 +16,10 @@ class TellASign(object):
   def __init__(self, universe, frame_period_ms=50):
     """
     """
-    self._wrapper = None
-    self._client = None
+    self._wrapper = ClientWrapper()
+    self._client = self._wrapper.Client()
+
+    self._thread = None
 
     self._thread = None
 
@@ -36,8 +38,6 @@ class TellASign(object):
   def start(self):
     """
     """
-    self._wrapper = ClientWrapper()
-    self._client = self._wrapper.Client()
     self._wrapper.AddEvent(self._refresh, self._send)
     self._wrapper.Run()
 
@@ -46,6 +46,11 @@ class TellASign(object):
     """
     if self._wrapper:
       self._wrapper.Stop()
+
+  def flush(self):
+    """
+    """
+    self._client.SendDmx(self._universe, copy.copy(self._data))
 
   def set(self, channels, value):
     """
