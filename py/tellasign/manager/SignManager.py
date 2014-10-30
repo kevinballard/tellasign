@@ -58,13 +58,8 @@ class TellASign(object):
     clean_value = int(min(DMX_MAX_SLOT_VALUE, max(DMX_MIN_SLOT_VALUE, value)))
 
     for channel in channels:
-      if channel < len(self._data):
+      if channel <= len(self._data):
         self._data[channel - 1] = clean_value
-
-  def flush(self):
-    """
-    """
-    self._client.SendDmx(self._universe, copy.copy(self._data))
 
   def _send(self):
     """

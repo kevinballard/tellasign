@@ -17,7 +17,7 @@ class HvsIntensityAdapter(BaseAdapter):
     self.child = child
     self.alpha = alpha
     self.scale = \
-        float(DMX_MAX_SLOT_VALUE) / math.log(DMX_MAX_SLOT_VALUE, self.alpha)
+        float(DMX_MAX_SLOT_VALUE) / math.pow(DMX_MAX_SLOT_VALUE, self.alpha)
 
   def set(self, channels, value):
     """
@@ -25,6 +25,6 @@ class HvsIntensityAdapter(BaseAdapter):
     if value == 0:
       adj_value = 0
     else:
-      adj_value = int(math.log(value, self.alpha) * self.scale)
+      adj_value = int(math.pow(value, self.alpha) * self.scale)
 
     self.child.set(channels, adj_value)
