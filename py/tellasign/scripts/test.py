@@ -46,4 +46,4 @@ def main_breath():
   effect.run()
 
 if __name__ == '__main__':
-  main()
+  main_breath()

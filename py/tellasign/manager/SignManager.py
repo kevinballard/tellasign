@@ -66,7 +66,7 @@ class TellASign(object):
   def _send(self):
     """
     """
-    print sys.stderr, "SEND: %s" % self._data
+    print >> sys.stderr, "SEND: %s" % self._data
     self._wrapper.AddEvent(self._refresh, self._send)
     self._client.SendDmx(self._universe, copy.copy(self._data), self._result)
 
