@@ -3,11 +3,11 @@
 
 import commandr
 
-from tellasign.hardware_map import CHS_ALL
+from tellasign.hardware_map import CHS_ALL_ALL
 from tellasign.manager.SignManager import TellASign
 
 @commandr.command('all-off')
-def all_off(universe=1, channels=list(CHS_ALL)):
+def all_off(universe=1, channels=list(CHS_ALL_ALL)):
   """
   """
   manager = TellASign(universe)
@@ -15,7 +15,7 @@ def all_off(universe=1, channels=list(CHS_ALL)):
   manager.flush()
 
 @commandr.command('all-on')
-def all_off(universe=1, channels=list(CHS_ALL), value=255):
+def all_off(universe=1, channels=list(CHS_ALL_ALL), value=255):
   """
   """
   manager = TellASign(universe)

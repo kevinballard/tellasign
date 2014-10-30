@@ -59,7 +59,7 @@ class TellASign(object):
 
     for channel in channels:
       if channel < len(self._data):
-        self._data[channel] = clean_value
+        self._data[channel - 1] = clean_value
 
   def flush(self):
     """
