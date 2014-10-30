@@ -1,8 +1,10 @@
 """
 """
+
 import array
 import copy
 import threading
+import sys
 
 from ola.ClientWrapper import ClientWrapper
 from ola.DMXConstants import DMX_MIN_SLOT_VALUE, DMX_MAX_SLOT_VALUE, DMX_UNIVERSE_SIZE
@@ -64,6 +66,7 @@ class TellASign(object):
   def _send(self):
     """
     """
+    print sys.stderr >> "SEND: %s" % self._data
     self._wrapper.AddEvent(self._refresh, self._send)
     self._client.SendDmx(self._universe, copy.copy(self._data), self._result)
 
