@@ -13,7 +13,7 @@ class TellASign(object):
   """
   """
 
-  def __init__(self, universe, frame_period_ms=50):
+  def __init__(self, universe, frame_period_ms=10):
     """
     """
     self._wrapper = ClientWrapper()

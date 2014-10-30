@@ -9,7 +9,7 @@ def main():
   adapter = manager
   adapter = HvsIntensityAdapter(adapter)
 
-  effect = LinearFlatFader(adapter, CHS_ALL, min_value=5)
+  effect = LinearFlatFader(adapter, CHS_ALL, min_value=32)
 
   manager.start_background()
   effect.run()

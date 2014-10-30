@@ -13,7 +13,7 @@ class LinearFlatFader(object):
       manager,
       channels,
       cycle_period_sec=10,
-      resolution_ms=50,
+      resolution_ms=10,
       min_value=DMX_MIN_SLOT_VALUE,
       max_value=DMX_MAX_SLOT_VALUE):
     """
