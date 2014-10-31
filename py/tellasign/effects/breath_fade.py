@@ -3,7 +3,9 @@
 
 import time
 
-from ola.DMXConstants import DMX_MAX_SLOT_VALUE, DMX_MIN_SLOT_VALUE
+#from ola.DMXConstants import DMX_MAX_SLOT_VALUE, DMX_MIN_SLOT_VALUE
+DMX_MAX_SLOT_VALUE = 255
+DMX_MIN_SLOT_VALUE = 0
 
 class BreathFader(object):
   """
@@ -51,16 +53,15 @@ class BreathFader(object):
       self._cycle_start = now
       self._reverse_cycle = not self._reverse_cycle
 
-    fraction = (now - self._cycle_start) / (self._cycle_period * (1 + self._dwell))
+    fraction = (now - self._cycle_start) / self._cycle_period
     if self._reverse_cycle:
-      fraction = 1 + self._dwell - fraction
+      fraction = 1.0 - fraction
 
     baseline_value = fraction * (self._max - self._min) + self._min
-
 
     for i, channel in enumerate(self._channels):
       channel_offset = float(i) / len(self._channels) * self._dwell * self._max
       self._manager.set(
-          channel,
-          min(baseline_value, self._max) - channel_offset)
+          [channel],
+          int(max(min(baseline_value, self._max) - channel_offset, 0)))
 

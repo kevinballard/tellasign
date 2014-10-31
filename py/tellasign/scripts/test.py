@@ -1,4 +1,5 @@
 from tellasign.adapters.hvs_intensity_adapter import HvsIntensityAdapter
+from tellasign.adapters.level_scaler import LevelScaler
 from tellasign.effects.breath_fade import BreathFader
 from tellasign.effects.compound_effect import CompoundEffect
 from tellasign.effects.linear_flat_fade import LinearFlatFader
@@ -10,8 +11,13 @@ def main():
 
   adapter = manager
   adapter = HvsIntensityAdapter(adapter)
+  adapter = LevelScaler(adapter, hardware_map.CHS_TELL, 0.85)
 
-  effect = LinearFlatFader(adapter,hardware_map.CHS_ALL, min_value=32)
+  effect = LinearFlatFader(
+      adapter,
+      hardware_map.CHS_ALL,
+      cycle_period_sec=6,
+      min_value=32)
 
   manager.start_background()
   effect.run()
@@ -21,6 +27,7 @@ def main_breath():
 
   adapter = manager
   adapter = HvsIntensityAdapter(adapter)
+  adapter = LevelScaler(adapter, hardware_map.CHS_TELL, 0.85)
 
   effect_logo = LinearFlatFader(adapter, hardware_map.CHS_LOGO, min_value=32)
   effect_tell = BreathFader(
