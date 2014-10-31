@@ -62,6 +62,6 @@ class BreathFader(object):
     for i, channel in enumerate(self._channels):
       channel_offset = float(i) / len(self._channels) * self._dwell * self._max
       self._manager.set(
-          [channel],
+          list(channel),
           int(max(min(baseline_value, self._max) - channel_offset, 0)))
 
