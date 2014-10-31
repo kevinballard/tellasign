@@ -9,12 +9,13 @@ class LevelScaler(BaseAdapter):
     """
     """
     self.child = child
-    self.channels = channels
+    self.channels = set(channels)
     self.factor = factor
 
   def set(self, channels, value):
     """
     """
+    channels = set(channels)
     scale_channels = channels.intersection(self.channels)
     pass_channels = channels - scale_channels
 
