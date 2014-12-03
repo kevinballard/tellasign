@@ -6,6 +6,7 @@ import commandr
 from tellasign import hardware_map
 from tellasign.adapters.hvs_intensity_adapter import HvsIntensityAdapter
 from tellasign.adapters.level_scaler import LevelScaler
+from tellasign.adapters.level_shifter import LevelShifter
 from tellasign.effects.linear_flat_fade import LinearFlatFader
 from tellasign.manager.dmx_manager import DmxManager
 
@@ -21,14 +22,14 @@ def main(universe=1):
 
   # Setup the animation stack.
   adapter = manager
+  adapter = LevelShifter(adapter, hardware_map.CHS_ALL, 4)
   adapter = HvsIntensityAdapter(adapter)
   adapter = LevelScaler(adapter, hardware_map.CHS_TELL, 0.85)
 
   effect = LinearFlatFader(
       adapter,
       hardware_map.CHS_ALL,
-      cycle_period_sec=12,
-      min_value=15)
+      cycle_period_sec=12)
 
   # Run forever.
   manager.start_background()

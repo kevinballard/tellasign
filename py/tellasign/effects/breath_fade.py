@@ -2,6 +2,7 @@
 where 'lower' channels fade in later and fade out sooner.
 """
 
+from collections import Iterable
 import time
 
 from tellasign.effects.effect import Effect
@@ -91,4 +92,7 @@ class BreathFader(Effect):
       # Cap the channel value to within the min and max.
       value = max(self._min, min(self._max, value))
 
-      self._manager.set([channel], value)
+      if not isinstance(channel, Iterable):
+        channel = [channel]
+
+      self._manager.set(channel, value)

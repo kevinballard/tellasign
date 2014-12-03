@@ -13,7 +13,7 @@ from tellasign.hardware_map import MIN_VALUE, MAX_VALUE
 
 from tellasign.hardware_map import NUM_CHANNELS
 
-SUBFRAME_WIDTH = 3
+SUBFRAME_WIDTH = 1
 
 class DmxManager(object):
   """Manager class which drives a set of channels through DMX.
