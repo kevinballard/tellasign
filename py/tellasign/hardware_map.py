@@ -2,6 +2,9 @@
 sign.
 """
 
+MIN_VALUE = 0
+MAX_VALUE = 255
+
 ###########################################################
 # Single (Atomic) Channels
 ###########################################################
@@ -71,4 +74,7 @@ CHS_TELLAPART = CHS_TELL | CHS_APART
 # Everything
 CHS_ALL = CHS_LOGO | CHS_TELLAPART
 
+CHS_ALL_ALL = set(range(max(CHS_ALL)))
+
 NUM_CHANNELS = max(CHS_ALL)
+
