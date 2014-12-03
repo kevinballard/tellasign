@@ -98,9 +98,9 @@ class DmxManager(object):
 
       packet[i] = int(min(MAX_VALUE, max(MIN_VALUE, value)))
 
-    print >> sys.stderr, "FPS: %.2f | SEND: %s" % (
-        self._frame / (time.time() - self._start),
-        packet)
+    # print >> sys.stderr, "FPS: %.2f | SEND: %s" % (
+    #     self._frame / (time.time() - self._start),
+    #     packet)
     self._client.SendDmx(self._universe, packet, self._result)
 
   def _result(self, response):
