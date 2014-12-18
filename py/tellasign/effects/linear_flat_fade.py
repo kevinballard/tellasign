@@ -36,7 +36,7 @@ class LinearFlatFader(Effect):
 
     self._refresh = resolution_ms
     self._cycle_period = cycle_period_sec * 1000 / 2
-    self._cycle_start = 0
+    self._cycle_start = time.time() * 1000
     self._reverse_cycle = False
 
     self._max = max_value
@@ -57,8 +57,8 @@ class LinearFlatFader(Effect):
     now = time.time() * 1000
 
     # Determine whether we're on the forward or reverse phase of the fade.
-    if now > self._cycle_start + self._cycle_period:
-      self._cycle_start = now
+    while now > self._cycle_start + self._cycle_period:
+      self._cycle_start += self._cycle_period
       self._reverse_cycle = not self._reverse_cycle
 
     # Calculate the fraction through the loop we're at.

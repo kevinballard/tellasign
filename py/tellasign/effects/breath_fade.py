@@ -41,7 +41,7 @@ class BreathFader(Effect):
 
     self._refresh = resolution_ms
     self._cycle_period = cycle_period_sec * 1000. / 2
-    self._cycle_start = 0
+    self._cycle_start = time.time() * 1000
     self._dwell = dwell
     self._reverse_cycle = False
 
@@ -64,8 +64,8 @@ class BreathFader(Effect):
 
     # Determine whether we've hit a cycle boundary (either a forward to backward
     # transition, or a restart transition).
-    if now > self._cycle_start + self._cycle_period:
-      self._cycle_start = now
+    while now > self._cycle_start + self._cycle_period:
+      self._cycle_start += self._cycle_period
       self._reverse_cycle = not self._reverse_cycle
 
     # Calculate where in the cycle we are.
